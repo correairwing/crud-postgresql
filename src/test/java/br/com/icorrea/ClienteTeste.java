@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+
 import org.junit.Test;
 
 import br.com.icorrea.dao.ClienteDAO;
@@ -17,7 +18,7 @@ public class ClienteTeste {
 		IClienteDAO dao = new ClienteDAO();
 		
 		Cliente cliente = new Cliente();
-		cliente.setCodigo("01");
+		cliente.setCodigo("05");
 		cliente.setNome("Irwing");
 		
 		Integer qtd = dao.cadastrar(cliente);
@@ -33,21 +34,27 @@ public class ClienteTeste {
 		assertNotNull(qtdDel);
 	}
 	
-	
 	@Test
-	public void atualizarTest() throws Exception {
+	public void excluirTest() throws Exception {
 		ClienteDAO clienteDAO = new ClienteDAO();
 		
 		Cliente cliente = new Cliente();
-		cliente.setCodigo("5");
+		cliente.setCodigo("05");
 		cliente.setNome("Irwing");
 		Integer countCad = clienteDAO.cadastrar(cliente);
 		assertTrue(countCad == 1);
 		
-		Cliente clienteDB = clienteDAO.consultar("5");
-		assertNotNull(clienteDB);
-		assertEquals(cliente.getCodigo(), clienteDB.getCodigo());
-		assertEquals(cliente.getNome(), clienteDB.getNome());
+		Cliente clienteBD = clienteDAO.consultar("05");
+		assertNotNull(clienteBD);
+		assertEquals(cliente.getCodigo(), clienteBD.getCodigo());
+		assertEquals(cliente.getNome(), clienteBD.getNome());
 		
+		Integer countDel = clienteDAO.excluir(clienteBD);
+		assertTrue(countDel == 1);
+		
+		Integer qtdDel = clienteDAO.excluir(clienteBD);
+		assertNotNull(qtdDel);
 	}
+		
+	
 }
