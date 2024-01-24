@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
 
 import org.junit.Test;
 
@@ -73,5 +74,36 @@ public class ClienteTeste {
 		
 		Integer countDel = clienteDAO.excluir(clienteBD);
 		assertTrue(countDel == 1);
+	}
+
+	@Test
+	public void consultarTudoTest() throws Exception {
+		ClienteDAO clienteDAO = new ClienteDAO();
+		
+		Cliente cliente = new Cliente();		
+		cliente.setCodigo("05");
+		cliente.setNome("Irwing");
+		Integer countCad = clienteDAO.cadastrar(cliente);
+		assertTrue(countCad == 1);
+		
+		Cliente clientes = new Cliente();
+		clientes.setCodigo("10");
+		clientes.setNome("Nicolas");
+		Integer countCad2 = clienteDAO.cadastrar(clientes);
+		assertTrue(countCad2 == 1);
+		
+		List<Cliente> list = clienteDAO.consultarTudo();
+		assertNotNull(list);
+		assertEquals(2, list.size());
+		
+		int countDel = 0;
+		for(Cliente cli : list) {
+			clienteDAO.excluir(cli);
+			countDel++;
+		}
+		assertEquals(list.size(), countDel);
+		
+		list = clienteDAO.consultarTudo();
+		assertEquals(list.size(), 0);
 	}
 }
