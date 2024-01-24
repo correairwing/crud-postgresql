@@ -32,4 +32,22 @@ public class ClienteTeste {
 		Integer qtdDel = dao.excluir(clienteBD);
 		assertNotNull(qtdDel);
 	}
+	
+	
+	@Test
+	public void atualizarTest() throws Exception {
+		ClienteDAO clienteDAO = new ClienteDAO();
+		
+		Cliente cliente = new Cliente();
+		cliente.setCodigo("5");
+		cliente.setNome("Irwing");
+		Integer countCad = clienteDAO.cadastrar(cliente);
+		assertTrue(countCad == 1);
+		
+		Cliente clienteDB = clienteDAO.consultar("5");
+		assertNotNull(clienteDB);
+		assertEquals(cliente.getCodigo(), clienteDB.getCodigo());
+		assertEquals(cliente.getNome(), clienteDB.getNome());
+		
+	}
 }

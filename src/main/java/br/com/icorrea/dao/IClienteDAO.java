@@ -1,5 +1,7 @@
 package br.com.icorrea.dao;
 
+import java.util.List;
+
 import br.com.icorrea.domain.Cliente;
 
 public interface IClienteDAO {
@@ -11,5 +13,11 @@ public interface IClienteDAO {
 
 
 	public Integer excluir(Cliente cliente) throws Exception;
+	
+	
+	public Integer atualizar(Cliente cliente) throws Exception;
+	
+	
+	public List<Cliente> consultarTudo() throws Exception;
 	
 }
