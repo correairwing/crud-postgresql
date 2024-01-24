@@ -97,8 +97,8 @@ public class ClienteDAO implements IClienteDAO {
 			String sql = "UPDATE TB_CLIENTE SET NOME = ?, CODIGO = ? WHERE ID = ?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, cliente.getNome());
-			ps.setString(1, cliente.getCodigo());
-			ps.setLong(1, cliente.getId());
+			ps.setString(2, cliente.getCodigo());
+			ps.setLong(3, cliente.getId());
 			return ps.executeUpdate();
 		} catch(Exception e) {
 			throw e;

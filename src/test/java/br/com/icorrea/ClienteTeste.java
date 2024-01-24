@@ -2,6 +2,7 @@ package br.com.icorrea;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -105,5 +106,40 @@ public class ClienteTeste {
 		
 		list = clienteDAO.consultarTudo();
 		assertEquals(list.size(), 0);
+	}
+	
+	@Test
+	public void atualizarTest() throws Exception{
+		ClienteDAO clienteDAO = new ClienteDAO();
+		
+		Cliente cliente = new Cliente();
+		cliente.setCodigo("05");
+		cliente.setNome("Irwing");
+		Integer countCad = clienteDAO.cadastrar(cliente);
+		assertTrue(countCad == 1);
+		
+		Cliente clienteBD = clienteDAO.consultar("05");
+		assertNotNull(clienteBD);
+		assertEquals(cliente.getCodigo(), clienteBD.getCodigo());
+		assertEquals(cliente.getNome(), clienteBD.getNome());
+		
+		clienteBD.setCodigo("06");
+		clienteBD.setNome("Irwing2");
+		Integer countUpdate = clienteDAO.atualizar(clienteBD);
+		assertTrue(countUpdate == 1);
+		
+		Cliente clienteBD1 = clienteDAO.consultar("05");
+		assertNull(clienteBD1);
+		
+		Cliente clienteBD2 = clienteDAO.consultar("06");
+		assertNotNull(clienteBD2);
+		assertEquals(clienteBD.getId(), clienteBD2.getId());
+		assertEquals(clienteBD.getCodigo(), clienteBD2.getCodigo());
+		assertEquals(clienteBD.getNome(), clienteBD2.getNome());
+		
+		List<Cliente> list = clienteDAO.consultarTudo();
+		for (Cliente cli : list) {
+			clienteDAO.excluir(cli);
+		}
 	}
 }
