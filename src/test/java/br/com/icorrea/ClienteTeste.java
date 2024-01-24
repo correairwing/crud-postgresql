@@ -56,5 +56,22 @@ public class ClienteTeste {
 		assertNotNull(qtdDel);
 	}
 		
-	
+	@Test
+	public void consultarTest() throws Exception {
+		ClienteDAO clienteDAO = new ClienteDAO();
+		
+		Cliente cliente = new Cliente();
+		cliente.setCodigo("05");
+		cliente.setNome("Irwing");
+		Integer countCad = clienteDAO.cadastrar(cliente);
+		assertTrue(countCad == 1);
+		
+		Cliente clienteBD = clienteDAO.consultar("05");
+		assertNotNull(clienteBD);
+		assertEquals(cliente.getCodigo(), clienteBD.getCodigo());
+		assertEquals(cliente.getNome(), clienteBD.getNome());
+		
+		Integer countDel = clienteDAO.excluir(clienteBD);
+		assertTrue(countDel == 1);
+	}
 }
