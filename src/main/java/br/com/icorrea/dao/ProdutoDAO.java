@@ -43,7 +43,7 @@ public class ProdutoDAO implements IProdutoDAO {
     	Produto produto = null;
 		try {
 			con = ConnectionFactory.getConnection();
-			String sql = "SELECT * FROM TB_CLIENTE WHERE CODIGO = ?";
+			String sql = "SELECT * FROM TB_PRODUTO WHERE CODIGO = ?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, codigo);
 			rs = ps.executeQuery();
@@ -74,7 +74,7 @@ public class ProdutoDAO implements IProdutoDAO {
     	PreparedStatement ps = null;
 		try {
 			con = ConnectionFactory.getConnection();
-			String sql = "DELETE FROM TB_CLIENTE WHERE CODIGO = ?";
+			String sql = "DELETE FROM TB_PRODUTO WHERE CODIGO = ?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, produto.getCodigo());
 			return ps.executeUpdate();
@@ -125,7 +125,7 @@ public class ProdutoDAO implements IProdutoDAO {
 		
 		try {
 			con = ConnectionFactory.getConnection();
-			String sql = "SELECT * FROM TB_CLIENTE";
+			String sql = "SELECT * FROM TB_PRODUTO";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();			
 			while(rs.next()) {
