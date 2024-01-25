@@ -33,5 +33,57 @@ public class ProdutoTeste {
 		assertNotNull(countDel);
 	}
 	
-	
+	@Test
+	public void excluirTest() throws Exception {
+		IProdutoDAO dao = new ProdutoDAO();
+		
+		Produto prod = new Produto();
+		prod.setCodigo("01");
+		prod.setNome("Produto 01");
+		Integer countCad = dao.cadastrar(prod);
+		assertTrue(countCad == 1);
+		
+		Produto prodBD = dao.consultar("01");
+		assertNotNull(prodBD);
+		assertEquals(prod.getCodigo(), prodBD.getCodigo());
+		assertEquals(prod.getNome(), prodBD.getNome());
+		
+		Integer countDel = dao.excluir(prodBD);
+		assertTrue(countDel == 1);
+		
+		Integer countDel2 = dao.excluir(prodBD);
+		assertNotNull(countDel2);
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
