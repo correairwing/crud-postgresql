@@ -1,13 +1,12 @@
 package br.com.icorrea.domain;
 
-public class Cliente {
+public class Produto {
 
-	private Long id;
-	
-	private String codigo;
-	
+	private Long id;	
+	private String codigo;	
 	private String nome;
-
+	
+	
 	public Long getId() {
 		return id;
 	}
